@@ -1,8 +1,15 @@
 class Decoder
   attr_reader :alphabet_map
+  attr_reader :state
+
+  # States
+  UPPERCASE   = 1
+  LOWERCASE   = 2
+  PUNCTUATION = 3
 
   def initialize
     @alphabet_map = build_alphabet_map
+    @state = UPPERCASE #Starts with uppercase
   end
 
 

@@ -14,6 +14,13 @@ describe Decoder do
     end
   end
 
+  describe "@states" do
+    it "is an integer" do
+      assert(@decoder.state.is_a?(Integer))
+    end
+  end
+
+
   describe "#to_letter" do
     it "it converts ints to letters using INT % 27" do
       assert_equal("R", @decoder.to_letter(18))
