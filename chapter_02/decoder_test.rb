@@ -32,9 +32,9 @@ describe Decoder do
   end
 
 
-  describe "#to_letter" do
+  describe "#decode" do
     it "it converts ints to letters using INT % 27" do
-      assert_equal("R", @decoder.to_letter(18))
+      assert_equal("R", @decoder.decode(18))
     end
   end
 end

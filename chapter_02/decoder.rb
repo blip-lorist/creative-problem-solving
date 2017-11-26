@@ -7,13 +7,20 @@ class Decoder
   LOWERCASE   = 2
   PUNCTUATION = 3
 
+  STATES_AND_DIVISORS = {
+    1 => 27,
+    2 => 27,
+    3 => 9,
+  }
+
   def initialize
     @alphabet_map = build_alphabet_map
     @state = UPPERCASE #Starts with uppercase
   end
 
-  def to_letter(integer)
-    remainder = integer % 27
+  def decode(integer)
+    divisor = STATES_AND_DIVISORS[self.state]
+    remainder = integer % divisor
     self.alphabet_map[remainder]
   end
 
