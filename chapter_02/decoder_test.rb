@@ -14,6 +14,13 @@ describe Decoder do
     end
   end
 
+  describe "@punctuation_map" do
+    it "is a hash of 8 integers and their corresponding punctuation" do
+      assert(@decoder.punctuation_map.is_a?(Hash))
+      assert_equal(@decoder.punctuation_map.keys.count,8)
+    end
+  end
+
   describe "@states" do
     it "is an integer" do
       assert(@decoder.state.is_a?(Integer))
@@ -38,7 +45,7 @@ describe Decoder do
     end
 
     it "can switch states based on integer input" do
-      assert_equal("Yes", @decoder.decode([241,0,32,20620,27]))
+      assert_equal("Yes!", @decoder.decode([241,0,32,20620,27,10]))
     end
   end
 end

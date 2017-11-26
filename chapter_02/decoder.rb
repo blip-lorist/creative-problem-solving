@@ -1,5 +1,5 @@
 class Decoder
-  attr_reader :alphabet_map
+  attr_reader :alphabet_map, :punctuation_map
   attr_accessor :state
 
   # States
@@ -15,6 +15,7 @@ class Decoder
 
   def initialize
     @alphabet_map = build_alphabet_map
+    @punctuation_map = build_punctuation_map
     @state = UPPERCASE #Starts with uppercase
   end
 
@@ -27,9 +28,11 @@ class Decoder
 
       if remainder == 0
         self.update_state
+      elsif self.state == PUNCTUATION
+        message << self.punctuation_map[remainder]
       else
         letter = self.alphabet_map[remainder]
-        letter = letter.downcase if self.state == Decoder::LOWERCASE
+        letter = letter.downcase if self.state == LOWERCASE
         message << letter
       end
     end
@@ -61,5 +64,18 @@ class Decoder
       alphabet_map[index + 1] =  alphabet[index]
     end
     alphabet_map
+  end
+
+  def build_punctuation_map
+    {
+      1 => "!",
+      2 => "?",
+      3 => ",",
+      4 => ".",
+      5 => " ",
+      6 => ";",
+      7 => '"',
+      8 => "'",
+    }
   end
 end
