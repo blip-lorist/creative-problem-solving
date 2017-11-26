@@ -12,6 +12,12 @@ class Decoder
     @state = UPPERCASE #Starts with uppercase
   end
 
+  def to_letter(integer)
+    remainder = integer % 27
+    self.alphabet_map[remainder]
+  end
+
+  private
 
   def build_alphabet_map
     # Creates a map like: 
@@ -27,10 +33,5 @@ class Decoder
       alphabet_map[index + 1] =  alphabet[index]
     end
     alphabet_map
-  end
-
-  def to_letter(integer)
-    remainder = integer % 27
-    self.alphabet_map[remainder]
   end
 end
