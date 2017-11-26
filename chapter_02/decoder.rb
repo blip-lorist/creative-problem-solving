@@ -18,10 +18,23 @@ class Decoder
     @state = UPPERCASE #Starts with uppercase
   end
 
-  def decode(integer)
-    divisor = STATES_AND_DIVISORS[self.state]
-    remainder = integer % divisor
-    self.alphabet_map[remainder]
+  def decode(integer_array)
+
+    message = []
+    integer_array.each do |integer|
+      divisor = STATES_AND_DIVISORS[self.state]
+      remainder = integer % divisor
+
+      if remainder == 0
+        self.update_state
+      else
+        letter = self.alphabet_map[remainder]
+        letter = letter.downcase if self.state == Decoder::LOWERCASE
+        message << letter
+      end
+    end
+
+    message.join("")
   end
 
   def update_state

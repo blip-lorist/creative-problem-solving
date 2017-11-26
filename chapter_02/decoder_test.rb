@@ -34,7 +34,11 @@ describe Decoder do
 
   describe "#decode" do
     it "it converts ints to letters using INT % 27" do
-      assert_equal("R", @decoder.decode(18))
+      assert_equal("R", @decoder.decode([18]))
+    end
+
+    it "can switch states based on integer input" do
+      assert_equal("Yes", @decoder.decode([241,0,32,20620,27]))
     end
   end
 end
