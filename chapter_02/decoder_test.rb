@@ -18,6 +18,17 @@ describe Decoder do
     it "is an integer" do
       assert(@decoder.state.is_a?(Integer))
     end
+
+    describe "#update_states" do
+      it "cycles through states and in the correct order" do
+        expected_states = [Decoder::UPPERCASE, Decoder::LOWERCASE, Decoder::PUNCTUATION, Decoder::UPPERCASE]
+
+        expected_states.each do |expected_state|
+          assert_equal(expected_state, @decoder.state)
+          @decoder.update_state
+        end
+      end
+    end
   end
 
 

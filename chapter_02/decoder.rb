@@ -1,6 +1,6 @@
 class Decoder
   attr_reader :alphabet_map
-  attr_reader :state
+  attr_accessor :state
 
   # States
   UPPERCASE   = 1
@@ -15,6 +15,14 @@ class Decoder
   def to_letter(integer)
     remainder = integer % 27
     self.alphabet_map[remainder]
+  end
+
+  def update_state
+    if self.state < 3
+      self.state += 1 # increment
+    else
+      self.state = 1 # reset
+    end
   end
 
   private
